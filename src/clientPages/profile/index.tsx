@@ -72,6 +72,7 @@ const ProfilePage = ({ data }: { data: ProfileInterface }) => {
         </Card>
 
         {/* Address Section */}
+
         <Card>
           <CardHeader className="flex flex-row items-center justify-between w-full">
             <CardTitle className="text-lg font-semibold">Address</CardTitle>
@@ -80,30 +81,37 @@ const ProfilePage = ({ data }: { data: ProfileInterface }) => {
               variant={'outline'}
               size={'sm'}
             >
-              Change Address
+              {address ? 'Change Address' : 'Add Address'}
             </Button>
           </CardHeader>
           <CardContent>
             <div className="space-y-2">
               <p>
-                Street: <span className=" font-medium">{address.street}</span>
+                Street:{' '}
+                <span className=" font-medium">{address?.street || ''}</span>
               </p>
               <p>
-                City: <span className=" font-medium">{address.city}</span>
+                City:{' '}
+                <span className=" font-medium">{address?.city || ''}</span>
               </p>
               <p>
-                State: <span className=" font-medium">{address.state}</span>
+                State:{' '}
+                <span className=" font-medium">{address?.state || ''}</span>
               </p>
               <p>
                 Postal Code:{' '}
-                <span className=" font-medium">{address.postalCode}</span>
+                <span className=" font-medium">
+                  {address?.postalCode || ''}
+                </span>
               </p>
               <p>
-                Country: <span className=" font-medium">{address.country}</span>
+                Country:{' '}
+                <span className=" font-medium">{address?.country || ''}</span>
               </p>
             </div>
           </CardContent>
         </Card>
+
         <ChangePasswordForm />
       </div>
       <ChangeAddress open={open} setOpen={setOpen} address={address} />

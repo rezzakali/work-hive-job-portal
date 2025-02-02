@@ -1,3 +1,5 @@
+'use client';
+
 import {
   Dialog,
   DialogContent,
@@ -58,11 +60,11 @@ const ChangeAddress = ({
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      city: address.city,
-      country: address.country,
-      postalCode: address.postalCode,
-      state: address.state,
-      street: address.street,
+      city: address?.city || '',
+      country: address?.country || '',
+      postalCode: address?.postalCode || '',
+      state: address?.state || '',
+      street: address?.street || '',
     },
   });
 
