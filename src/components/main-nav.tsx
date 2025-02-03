@@ -31,7 +31,7 @@ export async function MainNav() {
 
         {/* Navigation Links */}
         <nav className="hidden md:flex space-x-6">
-          <Link href="/">Recent Jobs</Link>
+          {user && <Link href="/">Recent Jobs</Link>}
           <Link href="/about-us">About us</Link>
           <Link href="/contact-us">Contact us</Link>
         </nav>

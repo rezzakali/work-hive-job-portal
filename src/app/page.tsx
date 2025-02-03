@@ -20,7 +20,7 @@ export const metadata = {
     title: 'Work Hive - Find Your Dream Job',
     description:
       'Work Hive is your go-to platform for finding and applying for top job opportunities. Start your career journey today!',
-    url: 'https://workhive.netlify.app',
+    url: 'https://workshive.netlify.app/',
     siteName: 'Work Hive',
     images: [
       {

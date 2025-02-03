@@ -3,8 +3,8 @@ import api from '../api';
 const jobsApi = api.injectEndpoints({
   endpoints: (builder) => ({
     fetchJobs: builder.query({
-      query: (id) => ({
-        url: `/jobs/employer/${id}`,
+      query: (userId) => ({
+        url: `/jobs/employer/${userId}`,
         method: 'GET',
       }),
     }),

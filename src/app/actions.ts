@@ -92,6 +92,7 @@ export const getJob = async ({ id }: { id: string }) => {
       'Content-Type': 'application/json',
       'x-access-token': cookie,
     },
+    credentials: 'include',
   });
 
   if (!res.ok) {

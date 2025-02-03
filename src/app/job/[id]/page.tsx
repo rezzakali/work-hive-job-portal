@@ -26,11 +26,11 @@ export async function generateMetadata({
     openGraph: {
       title: `${job.data.title} - ${job.data.company}`,
       description: job.data.description?.slice(0, 150) + '...',
-      url: `https://yourwebsite.com/job.data/${id}`,
+      url: `https://workshive.netlify.app/${id}`,
       type: 'article',
       images: [
         {
-          url: 'https://yourwebsite.com/work-hive-banner.png',
+          url: 'https://workshive.netlify.app/work-hive-banner.png',
           width: 800,
           height: 600,
           alt: job.data.title,
@@ -41,16 +41,23 @@ export async function generateMetadata({
       card: 'summary_large_image',
       title: `${job.data.title} - ${job.data.company}`,
       description: job.data.description?.slice(0, 150) + '...',
-      images: 'https://yourwebsite.com/work-hive-banner.png',
+      images: 'https://workshive.netlify.app/work-hive-banner.png',
     },
   };
 }
 
 const page = async ({ params }: JobPageProps) => {
-  const { id } = await params;
-  const job = await getJob({ id });
-  const appliedStatus = await checkApplication(id);
-  return <JobDetails job={job.data} applied={appliedStatus.data} />;
+  try {
+    const { id } = await params;
+
+    const appliedStatus = await checkApplication(id);
+    const job = await getJob({ id });
+
+    return <JobDetails job={job.data} applied={appliedStatus.data} />;
+  } catch (error: any) {
+    console.error('Error fetching job:', error);
+    return <div>Failed to load job details.</div>;
+  }
 };
 
 export default page;

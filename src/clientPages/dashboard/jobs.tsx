@@ -21,6 +21,7 @@ import {
 } from '@/src/components/ui/table';
 import { useToast } from '@/src/hooks/use-toast';
 import { useFetchJobsQuery } from '@/src/redux/jobs/jobsApi';
+import getErrorMessage from '@/src/utils/get-error-message';
 import { Edit3, MoreHorizontal, Trash2 } from 'lucide-react';
 import { startTransition, useState } from 'react';
 import { JobInterface } from '../home/home.interface';
@@ -33,21 +34,18 @@ const Jobs = ({ userId }: { userId: string }) => {
 
   const { toast } = useToast();
 
-  const {
-    isError,
-    isLoading,
-    isSuccess,
-    data: jobs,
-  } = useFetchJobsQuery(userId);
-
+  const { isError, isLoading, isSuccess, error, data } =
+    useFetchJobsQuery(userId);
   if (isLoading) {
     return <JobsSkeleton />;
   }
 
   if (!isLoading && isError) {
-    return <div>Something went wrong!</div>;
+    const errorMessage = getErrorMessage(error);
+    return <div className="text-center my-10">{errorMessage}</div>;
   }
-  if (!isLoading && !isError && jobs?.data?.length === 0) {
+
+  if (!isLoading && !isError && data?.data?.length === 0) {
     return <div>No jobs found!</div>;
   }
 
@@ -73,7 +71,7 @@ const Jobs = ({ userId }: { userId: string }) => {
 
   return (
     <div>
-      {isSuccess && Array.isArray(jobs.data) && (
+      {isSuccess && Array.isArray(data.data) && (
         <Table>
           <TableHeader>
             <TableRow>
@@ -88,8 +86,8 @@ const Jobs = ({ userId }: { userId: string }) => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {jobs.data.length > 0 ? (
-              jobs.data.map((job: JobInterface) => (
+            {data.data.length > 0 ? (
+              data.data.map((job: JobInterface) => (
                 <TableRow key={job._id}>
                   <TableCell>{job.title}</TableCell>
                   <TableCell>{job.company}</TableCell>
