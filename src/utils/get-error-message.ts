@@ -1,13 +1,12 @@
 const getErrorMessage = (error: any): string => {
-  if ('data' in error) {
-    if (
-      typeof error.data === 'object' &&
-      error.data !== null &&
-      'message' in error.data
-    ) {
-      return (error.data as { message: string }).message;
+  if (error && typeof error === 'object' && 'data' in error) {
+    const { data } = error;
+
+    if (typeof data === 'object' && data !== null && 'message' in data) {
+      return (data as { message: string }).message;
     }
   }
+
   return 'An unknown error occurred';
 };
 

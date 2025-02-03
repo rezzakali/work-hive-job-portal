@@ -20,34 +20,17 @@ import {
   TableRow,
 } from '@/src/components/ui/table';
 import { useToast } from '@/src/hooks/use-toast';
-import { useFetchJobsQuery } from '@/src/redux/jobs/jobsApi';
-import getErrorMessage from '@/src/utils/get-error-message';
 import { Edit3, MoreHorizontal, Trash2 } from 'lucide-react';
 import { startTransition, useState } from 'react';
 import { JobInterface } from '../home/home.interface';
 import EditJobDialog from './edit-job-dialog';
 
-const Jobs = ({ userId }: { userId: string }) => {
+const Jobs = ({ jobs }: { jobs: JobInterface[] }) => {
   const [editDialogOpen, setEditDialogOpen] = useState(false);
   const [closeDialogOpen, setCloseDialogOpen] = useState(false);
   const [selectedJob, setSelectedJob] = useState<JobInterface | null>(null);
 
   const { toast } = useToast();
-
-  const { isError, isLoading, isSuccess, error, data } =
-    useFetchJobsQuery(userId);
-  if (isLoading) {
-    return <JobsSkeleton />;
-  }
-
-  if (!isLoading && isError) {
-    const errorMessage = getErrorMessage(error);
-    return <div className="text-center my-10">{errorMessage}</div>;
-  }
-
-  if (!isLoading && !isError && data?.data?.length === 0) {
-    return <div>No jobs found!</div>;
-  }
 
   // Handle close/archive job
   const handleCloseJob = async () => {
@@ -71,7 +54,7 @@ const Jobs = ({ userId }: { userId: string }) => {
 
   return (
     <div>
-      {isSuccess && Array.isArray(data.data) && (
+      {jobs?.length > 0 && (
         <Table>
           <TableHeader>
             <TableRow>
@@ -86,8 +69,8 @@ const Jobs = ({ userId }: { userId: string }) => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {data.data.length > 0 ? (
-              data.data.map((job: JobInterface) => (
+            {jobs.length > 0 ? (
+              jobs.map((job: JobInterface) => (
                 <TableRow key={job._id}>
                   <TableCell>{job.title}</TableCell>
                   <TableCell>{job.company}</TableCell>
@@ -137,7 +120,7 @@ const Jobs = ({ userId }: { userId: string }) => {
               ))
             ) : (
               <TableRow>
-                <TableCell colSpan={7} align="center">
+                <TableCell colSpan={8} align="center">
                   No jobs found
                 </TableCell>
               </TableRow>

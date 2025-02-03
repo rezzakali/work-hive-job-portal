@@ -1,4 +1,4 @@
-import { getProfile } from '@/src/app/actions';
+import { getEmployerJob, getProfile } from '@/src/app/actions';
 import {
   Tabs,
   TabsContent,
@@ -10,6 +10,7 @@ import PostJobForm from './post-a-job';
 
 const Index = async () => {
   const user = await getProfile();
+  const jobs = user && (await getEmployerJob({ id: user.data._id }));
 
   return (
     <Tabs defaultValue="post-a-job" className="mt-10">
@@ -21,7 +22,7 @@ const Index = async () => {
         <PostJobForm />
       </TabsContent>
       <TabsContent value="jobs">
-        <Jobs userId={user.data._id} />
+        <Jobs jobs={jobs.data} />
       </TabsContent>
     </Tabs>
   );

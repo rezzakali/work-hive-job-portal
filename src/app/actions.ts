@@ -13,6 +13,7 @@ import { SignupInterface } from './signup/signup.interface';
 
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:5000';
 
+// singup
 export const signup = async (formData: SignupInterface) => {
   const res = await fetch(`${BASE_PATH}/auth/signup`, {
     method: 'POST',
@@ -30,6 +31,7 @@ export const signup = async (formData: SignupInterface) => {
   return await res.json(); // Return the successful response data
 };
 
+// signin
 export const signin = async (formData: SigninInterface) => {
   const res = await fetch(`${BASE_PATH}/auth/signin`, {
     method: 'POST',
@@ -47,6 +49,7 @@ export const signin = async (formData: SigninInterface) => {
   return await res.json(); // Return the successful response data
 };
 
+// get jobs
 export const getJobs = async ({
   search,
   page,
@@ -82,11 +85,11 @@ export const getJobs = async ({
   return await res.json(); // Return the successful response data
 };
 
+// get a single job
 export const getJob = async ({ id }: { id: string }) => {
   const cookieStore = await cookies();
   const cookie = cookieStore.get('client.sid')?.value || '';
-
-  const res = await fetch(`${BASE_PATH}/jobs/${id}`, {
+  const res = await fetch(`${BASE_PATH}/jobs/employer/${id}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -94,7 +97,27 @@ export const getJob = async ({ id }: { id: string }) => {
     },
     credentials: 'include',
   });
+  if (!res.ok) {
+    const errorData = await res.json(); // Parse error response
+    throw new Error(
+      JSON.stringify({ status: errorData.status, message: errorData.message })
+    );
+  }
+  return await res.json(); // Return the successful response data
+};
 
+// get employer's jobs
+export const getEmployerJob = async ({ id }: { id: string }) => {
+  const cookieStore = await cookies();
+  const cookie = cookieStore.get('client.sid')?.value || '';
+  const res = await fetch(`${BASE_PATH}/jobs/employer/${id}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-access-token': cookie,
+    },
+    credentials: 'include',
+  });
   if (!res.ok) {
     const errorData = await res.json(); // Parse error response
     throw new Error(

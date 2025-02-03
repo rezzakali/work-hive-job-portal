@@ -49,10 +49,8 @@ export async function generateMetadata({
 const page = async ({ params }: JobPageProps) => {
   try {
     const { id } = await params;
-
     const appliedStatus = await checkApplication(id);
     const job = await getJob({ id });
-
     return <JobDetails job={job.data} applied={appliedStatus.data} />;
   } catch (error: any) {
     console.error('Error fetching job:', error);

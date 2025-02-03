@@ -7,13 +7,14 @@ const api = createApi({
   refetchOnMountOrArgChange: 30,
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.NEXT_PUBLIC_BASE_URL,
-    mode: 'cors',
-    prepareHeaders: (headers, {}) => {
-      const token = getCookie('client.sid');
-
+    mode: 'cors', //  Explicitly allow CORS
+    credentials: 'include', //  Ensure cookies and auth headers are sent
+    prepareHeaders: async (headers) => {
+      const token = await getCookie('client.sid'); // Ensure this is working
       if (token) {
-        headers.set('x-access-token', `${token}`);
+        headers.set('x-access-token', token as string);
       }
+      headers.set('Content-Type', 'application/json'); // Explicitly set content type
       return headers;
     },
   }),
