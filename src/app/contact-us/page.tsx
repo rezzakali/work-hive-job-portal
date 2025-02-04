@@ -1,30 +1,30 @@
 import ContactUs from '@/src/clientPages/contact-us';
 
 export const metadata = {
-  title: 'Contact Us - Work Hive',
+  title: 'Contact Us - WorkShive',
   description:
-    'Get in touch with Work Hive for any inquiries, support, or partnership opportunities. We’re here to help job seekers and employers.',
+    'Get in touch with WorkShive for any inquiries, support, or partnership opportunities. We’re here to help job seekers and employers.',
   keywords: [
     'contact us',
     'support',
     'job portal',
-    'Work Hive',
+    'WorkShive',
     'career inquiries',
     'job seekers',
     'employer support',
   ],
   openGraph: {
-    title: 'Contact Us - Work Hive',
+    title: 'Contact Us - WorkShive',
     description:
-      'Reach out to Work Hive for any inquiries, support, or partnership opportunities. Learn more about how we help you connect with talent.',
+      'Reach out to WorkShive for any inquiries, support, or partnership opportunities. Learn more about how we help you connect with talent.',
     url: 'https://workshive.vercel.app/contact-us', // Replace with your actual URL
-    siteName: 'Work Hive',
+    siteName: 'WorkShive',
     images: [
       {
         url: 'https://workshive.vercel.app/contact-us.png', // Replace with your actual image URL
         width: 1200,
         height: 630,
-        alt: 'Contact Us - Work Hive',
+        alt: 'Contact Us - WorkShive',
       },
     ],
     locale: 'en_US',
@@ -32,9 +32,9 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Contact Us - Work Hive',
+    title: 'Contact Us - WorkShive',
     description:
-      'Contact Work Hive for inquiries, support, or partnership opportunities. Get in touch to learn more about our services.',
+      'Contact WorkShive for inquiries, support, or partnership opportunities. Get in touch to learn more about our services.',
     images: ['https://workshive.vercel.app/contact-us.png'], // Replace with your actual image URL
   },
 };

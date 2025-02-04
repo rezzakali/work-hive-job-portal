@@ -11,29 +11,29 @@ import Link from 'next/link';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'About Us - Work Hive',
+  title: 'About Us - WorkShive',
   description:
-    'Learn more about Work Hive, your trusted job portal application. Discover our mission, vision, and how we help job seekers find their dream jobs.',
+    'Learn more about WorkShive, your trusted job portal application. Discover our mission, vision, and how we help job seekers find their dream jobs.',
   keywords: [
     'about us',
     'job portal',
-    'Work Hive',
+    'WorkShive',
     'find jobs',
     'career opportunities',
     'job search',
   ],
   openGraph: {
-    title: 'About Us - Work Hive',
+    title: 'About Us - WorkShive',
     description:
-      'Learn more about Work Hive, your trusted job portal application. Discover our mission, vision, and how we help job seekers find their dream jobs.',
+      'Learn more about WorkShive, your trusted job portal application. Discover our mission, vision, and how we help job seekers find their dream jobs.',
     url: 'https://workshive.vercel.app/about-us', // Replace with your actual URL
-    siteName: 'Work Hive',
+    siteName: 'WorkShive',
     images: [
       {
         url: 'https://workshive.vercel.app/about-us.png', // Replace with your actual image URL
         width: 1200,
         height: 630,
-        alt: 'About Us - Work Hive',
+        alt: 'About Us - WorkShive',
       },
     ],
     locale: 'en_US',
@@ -41,9 +41,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'About Us - Work Hive',
+    title: 'About Us - WorkShive',
     description:
-      'Learn more about Work Hive, your trusted job portal application. Discover our mission, vision, and how we help job seekers find their dream jobs.',
+      'Learn more about WorkShive, your trusted job portal application. Discover our mission, vision, and how we help job seekers find their dream jobs.',
     images: ['https://workshive.vercel.app/about-us.png'], // Replace with your actual image URL
   },
 };
@@ -57,7 +57,7 @@ const Page = () => {
         </CardHeader>
         <CardContent>
           <p className="text-lg leading-relaxed">
-            Welcome to our <strong>Work Hive</strong>! We are dedicated to
+            Welcome to our <strong>WorkShive</strong>! We are dedicated to
             connecting job seekers with top employers in the industry. Our
             platform simplifies the job search process, making it easier for
             candidates to find opportunities that match their skills and

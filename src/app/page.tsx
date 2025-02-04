@@ -2,41 +2,41 @@ import { getJobs, getProfile } from '@/src/app/actions';
 import Home from '@/src/clientPages/home';
 
 export const metadata = {
-  title: 'Work Hive - Find Your Dream Job',
+  title: 'WorkShive - Find Your Dream Job',
   description:
-    'Work Hive is a modern job portal that connects talented professionals with top companies. Find, apply, and secure your dream job today!',
+    'WorkShive is a modern job portal that connects talented professionals with top companies. Find, apply, and secure your dream job today!',
   keywords: [
     'jobs',
     'job portal',
     'hiring',
     'career',
     'employment',
-    'work hive',
+    'WorkShive',
     'remote jobs',
     'freelance work',
     'tech jobs',
   ],
   openGraph: {
-    title: 'Work Hive - Find Your Dream Job',
+    title: 'WorkShive - Find Your Dream Job',
     description:
-      'Work Hive is your go-to platform for finding and applying for top job opportunities. Start your career journey today!',
+      'WorkShive is your go-to platform for finding and applying for top job opportunities. Start your career journey today!',
     url: 'https://workshive.vercel.app',
-    siteName: 'Work Hive',
+    siteName: 'WorkShive',
     images: [
       {
         url: '/work-hive-banner.png', // Replace with actual image path
         width: 1200,
         height: 630,
-        alt: 'Work Hive Job Portal',
+        alt: 'WorkShive Job Portal',
       },
     ],
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Work Hive - Find Your Dream Job',
+    title: 'WorkShive - Find Your Dream Job',
     description:
-      'Join Work Hive to explore top job opportunities and kickstart your career today!',
+      'Join WorkShive to explore top job opportunities and kickstart your career today!',
     images: ['/work-hive-banner.png'], // Replace with actual image path
   },
   robots: 'index, follow',

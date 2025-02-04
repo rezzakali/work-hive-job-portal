@@ -1,6 +1,6 @@
 {
-    "name": "Work Hive",
-    "short_name": "WorkHive",
+    "name": "WorkShive",
+    "short_name": "WorkShive",
     "description": "A modern job portal connecting employers and job seekers.",
     "start_url": "/",
     "display": "standalone",

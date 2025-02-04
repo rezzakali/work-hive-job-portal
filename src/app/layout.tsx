@@ -15,7 +15,7 @@ const robotoSans = Roboto_Mono({
   weight: ['300', '400', '500', '700'],
 });
 export const metadata: Metadata = {
-  title: 'Work Hive - Job Portal',
+  title: 'WorkShive - Job Portal',
   description: 'Find your next career opportunity',
   keywords: ['jobs', 'career', 'employment', 'job portal'],
   authors: [{ name: 'Job Portal Team' }],

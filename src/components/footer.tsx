@@ -20,7 +20,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* 🔹 About Section */}
           <div>
-            <h2 className="text-lg font-semibold">Work Hive</h2>
+            <h2 className="text-lg font-semibold">WorkShive</h2>
             <p className="mt-2">
               Find your dream job with ease. Browse listings from top companies
               worldwide.
