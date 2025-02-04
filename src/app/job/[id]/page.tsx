@@ -53,7 +53,6 @@ const page = async ({ params }: JobPageProps) => {
     const job = await getJob({ id });
     return <JobDetails job={job.data} applied={appliedStatus.data} />;
   } catch (error: any) {
-    console.error('Error fetching job:', error);
     return <div>Failed to load job details.</div>;
   }
 };

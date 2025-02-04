@@ -1,6 +1,6 @@
 'use server';
 
-import { revalidatePath } from 'next/cache';
+import { revalidatePath, revalidateTag } from 'next/cache';
 import { cookies } from 'next/headers';
 import { ContactFormInterface } from '../clientPages/contact-us/contact.interface';
 import { PostAJobInterface } from '../clientPages/dashboard/dashboard.interface';
@@ -89,7 +89,7 @@ export const getJobs = async ({
 export const getJob = async ({ id }: { id: string }) => {
   const cookieStore = await cookies();
   const cookie = cookieStore.get('client.sid')?.value || '';
-  const res = await fetch(`${BASE_PATH}/jobs/employer/${id}`, {
+  const res = await fetch(`${BASE_PATH}/jobs/${id}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -117,6 +117,7 @@ export const getEmployerJob = async ({ id }: { id: string }) => {
       'x-access-token': cookie,
     },
     credentials: 'include',
+    next: { tags: ['EmployerJobs'] },
   });
   if (!res.ok) {
     const errorData = await res.json(); // Parse error response
@@ -333,7 +334,9 @@ export const editJob = async ({
 }) => {
   const cookieStore = await cookies();
   const cookie = cookieStore.get('client.sid')?.value || '';
+
   const formattedData = { jobId: id, ...data };
+
   const res = await fetch(`${BASE_PATH}/jobs`, {
     method: 'PATCH',
     headers: {
@@ -349,7 +352,8 @@ export const editJob = async ({
       JSON.stringify({ status: errorData.status, message: errorData.message })
     );
   }
-  revalidatePath('/dashboard', 'page');
+  revalidateTag('EmployerJobs');
+
   return await res.json(); // Return the successful response data
 };
 

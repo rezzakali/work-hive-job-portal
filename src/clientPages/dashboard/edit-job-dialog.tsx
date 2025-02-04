@@ -1,10 +1,15 @@
 'use client';
 
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+
 import { editJob } from '@/src/app/actions';
 import { Button } from '@/src/components/ui/button';
 import {
   Dialog,
   DialogContent,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
 } from '@/src/components/ui/dialog';
@@ -13,6 +18,7 @@ import {
   FormControl,
   FormField,
   FormItem,
+  FormLabel,
   FormMessage,
 } from '@/src/components/ui/form';
 import { Input } from '@/src/components/ui/input';
@@ -24,14 +30,11 @@ import {
   SelectValue,
 } from '@/src/components/ui/select';
 import { Textarea } from '@/src/components/ui/textarea';
-import { toast } from '@/src/components/ui/use-toast';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { useToast } from '@/src/hooks/use-toast';
 import React, { useTransition } from 'react';
-import { useForm } from 'react-hook-form';
-import * as z from 'zod';
 import { JobInterface } from '../home/home.interface';
 
-// 🔹 Zod Schema for Form Validation
+// Zod Schema for Form Validation
 const jobSchema = z.object({
   title: z.string().min(3, 'Title must be at least 3 characters'),
   company: z.string().min(3, 'Company name must be at least 3 characters'),
@@ -45,25 +48,24 @@ const jobSchema = z.object({
     'internship',
   ]),
   experienceLevel: z.enum(['entry-level', 'mid-level', 'senior-level']),
-  status: z.string().min(3, 'Status is required'),
   description: z.string().min(10, 'Description must be at least 10 characters'),
-  skills: z.string().nonempty('At least one skill is required').optional(),
+  skills: z.string().nonempty('At least one skill is required'),
 });
 
 type JobFormValues = z.infer<typeof jobSchema>;
 
 const EditJobDialog = ({
-  job,
   open,
   setOpen,
+  job,
 }: {
-  job: JobInterface;
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  job: JobInterface;
 }) => {
+  const { toast } = useToast();
   const [isPending, startTransition] = useTransition();
 
-  // 🔹 React Hook Form Setup
   const form = useForm<JobFormValues>({
     resolver: zodResolver(jobSchema),
     defaultValues: {
@@ -72,23 +74,14 @@ const EditJobDialog = ({
       company: job.company,
       location: job.location,
       salary: String(job.salary),
-      employmentType: job.employmentType as
-        | 'full-time'
-        | 'part-time'
-        | 'contract'
-        | 'freelance'
-        | 'internship',
-      experienceLevel: job.experienceLevel as
-        | 'entry-level'
-        | 'mid-level'
-        | 'senior-level',
+      employmentType: 'full-time',
+      experienceLevel: 'entry-level',
       skills: job.skills.join(','),
     },
   });
 
   //  Form Submission Handler
   const onSubmit = async (values: JobFormValues) => {
-    console.log('Form Values:', values); // Debug form values
     startTransition(async () => {
       try {
         const { salary, ...restData } = values;
@@ -104,6 +97,7 @@ const EditJobDialog = ({
           title: 'Success',
           description: res.message || 'Job updated successfully',
         });
+
         setOpen(false);
       } catch (error) {
         toast({
@@ -117,27 +111,20 @@ const EditJobDialog = ({
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogContent className="max-h-[40rem] overflow-y-scroll">
+      <DialogContent className="max-h-[30rem] overflow-y-scroll">
         <DialogHeader>
           <DialogTitle>Edit Job</DialogTitle>
         </DialogHeader>
         <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-5 w-full"
-          >
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
             <FormField
               control={form.control}
               name="title"
               render={({ field }) => (
                 <FormItem>
+                  <FormLabel>Title</FormLabel>
                   <FormControl>
-                    <Input
-                      placeholder="Job title"
-                      {...field}
-                      autoCorrect="true"
-                      autoCapitalize="true"
-                    />
+                    <Input placeholder="Job Title" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -148,6 +135,7 @@ const EditJobDialog = ({
               name="description"
               render={({ field }) => (
                 <FormItem>
+                  <FormLabel>Description</FormLabel>
                   <FormControl>
                     <Textarea
                       placeholder="Job description"
@@ -161,19 +149,16 @@ const EditJobDialog = ({
                 </FormItem>
               )}
             />
+
             <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
               <FormField
                 control={form.control}
                 name="company"
                 render={({ field }) => (
                   <FormItem>
+                    <FormLabel>Company</FormLabel>
                     <FormControl>
-                      <Input
-                        placeholder="Your company name"
-                        {...field}
-                        autoComplete="true"
-                        autoCorrect="true"
-                      />
+                      <Input placeholder="Your company name" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -184,13 +169,9 @@ const EditJobDialog = ({
                 name="location"
                 render={({ field }) => (
                   <FormItem>
+                    <FormLabel>Location</FormLabel>
                     <FormControl>
-                      <Input
-                        placeholder="Company location"
-                        {...field}
-                        autoComplete="true"
-                        autoCorrect="true"
-                      />
+                      <Input placeholder="Company location" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -202,6 +183,7 @@ const EditJobDialog = ({
               name="salary"
               render={({ field }) => (
                 <FormItem>
+                  <FormLabel>Salary</FormLabel>
                   <FormControl>
                     <Input placeholder="Salary (monthly)" {...field} />
                   </FormControl>
@@ -215,6 +197,7 @@ const EditJobDialog = ({
                 name="employmentType"
                 render={({ field }) => (
                   <FormItem>
+                    <FormLabel>Employment Type</FormLabel>
                     <Select onValueChange={field.onChange} value={field.value}>
                       <FormControl>
                         <SelectTrigger>
@@ -238,6 +221,7 @@ const EditJobDialog = ({
                 name="experienceLevel"
                 render={({ field }) => (
                   <FormItem>
+                    <FormLabel>Experience Level</FormLabel>
                     <Select onValueChange={field.onChange} value={field.value}>
                       <FormControl>
                         <SelectTrigger>
@@ -262,16 +246,19 @@ const EditJobDialog = ({
               name="skills"
               render={({ field }) => (
                 <FormItem>
+                  <FormLabel>Skills</FormLabel>
                   <FormControl>
-                    <Input placeholder="Comma-separated skills" {...field} />
+                    <Input placeholder="Required Skills" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <Button type="submit" className="w-full" disabled={isPending}>
-              {isPending ? 'Loading...' : 'Submit'}
-            </Button>
+            <DialogFooter>
+              <Button type="submit" disabled={isPending} className="w-full">
+                {isPending ? 'Loading...' : 'Save Changes'}
+              </Button>
+            </DialogFooter>
           </form>
         </Form>
       </DialogContent>
