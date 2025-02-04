@@ -1,8 +1,8 @@
-# Work Hive - Job Portal
+# WorkShive - Job Portal
 
 ## Introduction
 
-Welcome to **Work Hive**, your trusted job portal platform designed to help job seekers find their dream jobs and employers connect with top talent. Whether you're looking for your next career opportunity or trying to hire the perfect candidate, **Work Hive** offers a seamless and user-friendly experience.
+Welcome to **WorkShive**, your trusted job portal platform designed to help job seekers find their dream jobs and employers connect with top talent. Whether you're looking for your next career opportunity or trying to hire the perfect candidate, **WorkShive** offers a seamless and user-friendly experience.
 
 ## Features
 
@@ -49,4 +49,4 @@ If you have any questions or need support, feel free to get in touch with our te
 
 ---
 
-**Join Work Hive today and unlock your future career opportunities!**
+**Join WorkShive today and unlock your future career opportunities!**
