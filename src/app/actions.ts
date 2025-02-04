@@ -121,9 +121,7 @@ export const getEmployerJob = async ({ id }: { id: string }) => {
   });
   if (!res.ok) {
     const errorData = await res.json(); // Parse error response
-    throw new Error(
-      JSON.stringify({ status: errorData.status, message: errorData.message })
-    );
+    return errorData;
   }
   return await res.json(); // Return the successful response data
 };

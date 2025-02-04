@@ -25,7 +25,7 @@ import { JobInterface } from '../home/home.interface';
 import EditJobDialog from './edit-job-dialog';
 import JobDetailsDialog from './job-details';
 
-const Jobs = ({ jobs }: { jobs: JobInterface[] }) => {
+const Jobs = ({ jobs = [] }: { jobs: JobInterface[] }) => {
   const [editDialogOpen, setEditDialogOpen] = useState(false);
   const [closeDialogOpen, setCloseDialogOpen] = useState(false);
   const [detailsDialogOpen, setDetailsDialogOpen] = useState(false);
@@ -55,7 +55,7 @@ const Jobs = ({ jobs }: { jobs: JobInterface[] }) => {
 
   return (
     <div>
-      {jobs?.length > 0 && (
+      {jobs?.length > 0 ? (
         <Table>
           <TableHeader>
             <TableRow>
@@ -138,6 +138,8 @@ const Jobs = ({ jobs }: { jobs: JobInterface[] }) => {
             )}
           </TableBody>
         </Table>
+      ) : (
+        <p className="text-center my-10">No jobs found for this employer!</p>
       )}
       {editDialogOpen && selectedJob && (
         <EditJobDialog

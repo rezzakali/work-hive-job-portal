@@ -10,7 +10,13 @@ import PostJobForm from './post-a-job';
 
 const Index = async () => {
   const user = await getProfile();
-  const jobs = user && (await getEmployerJob({ id: user.data._id }));
+  let jobs;
+  try {
+    const res = user && (await getEmployerJob({ id: user.data._id }));
+    jobs = res.data;
+  } catch (error) {
+    jobs = []; // Fallback to an empty array or handle the error as needed
+  }
 
   return (
     <Tabs defaultValue="post-a-job" className="mt-10">
@@ -22,7 +28,7 @@ const Index = async () => {
         <PostJobForm />
       </TabsContent>
       <TabsContent value="jobs">
-        <Jobs jobs={jobs.data} />
+        <Jobs jobs={jobs} />
       </TabsContent>
     </Tabs>
   );
