@@ -22,9 +22,11 @@ const NotificationDropdown = ({
 }) => {
   const router = useRouter(); // Initialize router
 
-  const hasUnread = notifications.some(
-    (n) => !n.isReadBy.includes(userId) // Check if user has not read this notification
-  );
+  const hasUnread = Array.isArray(notifications)
+    ? notifications.some(
+        (n) => Array.isArray(n.isReadBy) && !n.isReadBy.includes(userId)
+      )
+    : false;
 
   const handleNotificationClick = async (
     notification: NotificationInterface
