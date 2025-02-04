@@ -15,10 +15,7 @@ import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 export async function MainNav() {
   const cookieStore = await cookies();
   const cookie = cookieStore.get('client.sid')?.value;
-
   const user = cookie && (await getProfile());
-  // const notifications =
-  //   cookie && user && (await getNotifications({ page: 1, limit: 5 }));
 
   return (
     <header className="bg-background shadow-sm sticky top-0 z-50 w-full">
@@ -39,12 +36,7 @@ export async function MainNav() {
           <ModeToggle />
 
           {/* Move NotificationDropdown to a Client Component */}
-          {user && (
-            <NotificationDropdownWrapper
-              notifications={[]}
-              userId={user.data._id}
-            />
-          )}
+          {user && <NotificationDropdownWrapper userId={user.data._id} />}
 
           {user && (
             <Avatar className="w-7 h-7">
