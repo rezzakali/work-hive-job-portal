@@ -19,7 +19,7 @@ export async function MainNav() {
   const user = cookie && (await getProfile());
 
   const notifications =
-    cookie && (await getNotifications({ page: 1, limit: 5 }));
+    cookie && user && (await getNotifications({ page: 1, limit: 5 }));
 
   return (
     <header className="bg-background shadow-sm sticky top-0 z-50 w-full">
