@@ -22,7 +22,7 @@ export async function MainNav() {
       <div className="container mx-auto px-4 md:px-0 lg:px-0 py-3 flex justify-between items-center">
         <div>
           <Link href="/" className="text-xl font-bold">
-            Work Hive
+            WorkShive
           </Link>
         </div>
 

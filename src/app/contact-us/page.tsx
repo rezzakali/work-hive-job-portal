@@ -17,11 +17,11 @@ export const metadata = {
     title: 'Contact Us - Work Hive',
     description:
       'Reach out to Work Hive for any inquiries, support, or partnership opportunities. Learn more about how we help you connect with talent.',
-    url: 'https://workshive.netlify.app/contact-us', // Replace with your actual URL
+    url: 'https://workshive.vercel.app/contact-us', // Replace with your actual URL
     siteName: 'Work Hive',
     images: [
       {
-        url: 'https://workshive.netlify.app/contact-us.png', // Replace with your actual image URL
+        url: 'https://workshive.vercel.app/contact-us.png', // Replace with your actual image URL
         width: 1200,
         height: 630,
         alt: 'Contact Us - Work Hive',
@@ -35,7 +35,7 @@ export const metadata = {
     title: 'Contact Us - Work Hive',
     description:
       'Contact Work Hive for inquiries, support, or partnership opportunities. Get in touch to learn more about our services.',
-    images: ['https://workshive.netlify.app/contact-us.png'], // Replace with your actual image URL
+    images: ['https://workshive.vercel.app/contact-us.png'], // Replace with your actual image URL
   },
 };
 

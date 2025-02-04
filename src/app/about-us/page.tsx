@@ -26,11 +26,11 @@ export const metadata: Metadata = {
     title: 'About Us - Work Hive',
     description:
       'Learn more about Work Hive, your trusted job portal application. Discover our mission, vision, and how we help job seekers find their dream jobs.',
-    url: 'https://workshive.netlify.app/about-us', // Replace with your actual URL
+    url: 'https://workshive.vercel.app/about-us', // Replace with your actual URL
     siteName: 'Work Hive',
     images: [
       {
-        url: 'https://workshive.netlify.app/about-us.png', // Replace with your actual image URL
+        url: 'https://workshive.vercel.app/about-us.png', // Replace with your actual image URL
         width: 1200,
         height: 630,
         alt: 'About Us - Work Hive',
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     title: 'About Us - Work Hive',
     description:
       'Learn more about Work Hive, your trusted job portal application. Discover our mission, vision, and how we help job seekers find their dream jobs.',
-    images: ['https://workshive.netlify.app/about-us.png'], // Replace with your actual image URL
+    images: ['https://workshive.vercel.app/about-us.png'], // Replace with your actual image URL
   },
 };
 
