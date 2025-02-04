@@ -6,7 +6,7 @@ import {
 } from '@/src/components/ui/dropdown-menu';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
-import { getNotifications, getProfile } from '../app/actions';
+import { getProfile } from '../app/actions';
 import LogoutItem from './logout-item';
 import ModeToggle from './mode-toggle';
 import NotificationDropdownWrapper from './notifications.dropdown-wrapper';
@@ -17,8 +17,8 @@ export async function MainNav() {
   const cookie = cookieStore.get('client.sid')?.value;
 
   const user = cookie && (await getProfile());
-  const notifications =
-    cookie && user && (await getNotifications({ page: 1, limit: 5 }));
+  // const notifications =
+  //   cookie && user && (await getNotifications({ page: 1, limit: 5 }));
 
   return (
     <header className="bg-background shadow-sm sticky top-0 z-50 w-full">
@@ -41,7 +41,7 @@ export async function MainNav() {
           {/* Move NotificationDropdown to a Client Component */}
           {user && (
             <NotificationDropdownWrapper
-              notifications={notifications}
+              notifications={[]}
               userId={user.data._id}
             />
           )}
