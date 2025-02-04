@@ -1,16 +1,15 @@
-import { Button } from '@/src/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/src/components/ui/dropdown-menu';
-import { Bell } from 'lucide-react';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
-import { getProfile } from '../app/actions';
+import { getNotifications, getProfile } from '../app/actions';
 import LogoutItem from './logout-item';
 import ModeToggle from './mode-toggle';
+import NotificationDropdown from './notifications.dropdown';
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 
 export async function MainNav() {
@@ -18,6 +17,9 @@ export async function MainNav() {
   const cookie = cookieStore.get('client.sid')?.value;
 
   const user = cookie && (await getProfile());
+
+  const notifications =
+    cookie && (await getNotifications({ page: 1, limit: 5 }));
 
   return (
     <header className="bg-background shadow-sm sticky top-0 z-50 w-full">
@@ -42,10 +44,12 @@ export async function MainNav() {
           <ModeToggle />
 
           {/* Notification Icon */}
-          <Button variant="ghost" className="relative" size={'sm'}>
-            <Bell />
-            <span className="absolute top-0 right-0 block h-1.5 w-1.5 bg-red-500 rounded-full"></span>
-          </Button>
+          {user && (
+            <NotificationDropdown
+              notifications={notifications?.data}
+              userId={user.data?._id}
+            />
+          )}
 
           {/* User Dropdown */}
 

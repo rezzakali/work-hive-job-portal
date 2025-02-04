@@ -398,3 +398,59 @@ export const contactApi = async (formData: ContactFormInterface) => {
   }
   return await res.json(); // Return the successful response data
 };
+
+// fetch notifications
+export const getNotifications = async ({
+  page,
+  limit,
+}: {
+  page: number;
+  limit: number;
+}) => {
+  const cookieStore = await cookies();
+  const cookie = cookieStore.get('client.sid')?.value || '';
+
+  const res = await fetch(
+    `${BASE_PATH}/general/notifications/unread?page=${page}&limit=${limit}`,
+    {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-access-token': cookie,
+      },
+      next: { tags: ['Notifications'] },
+    }
+  );
+
+  if (!res.ok) {
+    const errorData = await res.json(); // Parse error response
+    throw new Error(
+      JSON.stringify({ status: errorData.status, message: errorData.message })
+    );
+  }
+  return await res.json(); // Return the successful response data
+};
+
+// mark notification as read
+export const markNotificationRead = async (notificationId: string) => {
+  const cookieStore = await cookies();
+  const cookie = cookieStore.get('client.sid')?.value || '';
+
+  const res = await fetch(`${BASE_PATH}/general/notifications/mark-read`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-access-token': cookie,
+    },
+    body: JSON.stringify({ notificationId }),
+  });
+
+  if (!res.ok) {
+    const errorData = await res.json(); // Parse error response
+    throw new Error(
+      JSON.stringify({ status: errorData.status, message: errorData.message })
+    );
+  }
+  revalidateTag('Notifications');
+  return await res.json(); // Return the successful response data
+};
