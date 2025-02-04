@@ -30,9 +30,8 @@ const NotificationDropdown = ({
     notification: NotificationInterface
   ) => {
     if (notification.jobId) {
+      await markNotificationRead(notification._id); // Mark notification as read
       router.push(`/job/${notification.jobId}`); // Navigate to job details page
-      // Mark notification as read
-      await markNotificationRead(notification._id);
     }
   };
 

@@ -46,7 +46,7 @@ export async function MainNav() {
           {/* Notification Icon */}
           {user && (
             <NotificationDropdown
-              notifications={notifications?.data}
+              notifications={notifications?.data || []}
               userId={user.data?._id}
             />
           )}
