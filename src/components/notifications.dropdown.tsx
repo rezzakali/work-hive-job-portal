@@ -1,4 +1,4 @@
-'use client'; // Mark the component as a Client Component
+'use client';
 
 import { Bell } from 'lucide-react';
 import moment from 'moment';

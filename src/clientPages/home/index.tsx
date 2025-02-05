@@ -4,6 +4,7 @@ import { Job } from '@/src/components/job-card';
 
 import PaginationComponent from '@/src/components/PaginationComponent';
 import { Input } from '@/src/components/ui/input';
+import useFCM from '@/src/hooks/useFCMS';
 import { setUser } from '@/src/redux/user/userSlice';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
@@ -25,6 +26,8 @@ export default function Home({
   const pathname = usePathname();
   const { replace } = useRouter();
 
+  const { messages, fcmToken } = useFCM();
+
   const handleSearch = useDebouncedCallback((term) => {
     const params = new URLSearchParams(searchParams);
     if (term) {
@@ -42,6 +45,14 @@ export default function Home({
       dispatch(setUser(profile));
     }
   }, [profile]);
+
+  // useEffect(() => {
+  //   requestForToken();
+
+  //   onMessage(messaging(), (payload) => {
+  //     console.log('Foreground Notification Received:', payload);
+  //   });
+  // }, []);
 
   return (
     <div className="py-8 space-y-8">

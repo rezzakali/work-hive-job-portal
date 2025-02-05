@@ -22,15 +22,15 @@ export async function generateMetadata({
 
   return {
     title: `${job.data.title} - ${job.data.company}`,
-    description: job.data.description?.slice(0, 150) + '...', // Limit description
+    description: job.data.description?.slice(0, 150) + '...',
     openGraph: {
       title: `${job.data.title} - ${job.data.company}`,
       description: job.data.description?.slice(0, 150) + '...',
-      url: `https://workshive.vercel.app/${id}`,
+      url: `https://workshive.vercel.app/job/${id}`,
       type: 'article',
       images: [
         {
-          url: 'https://workshive.vercel.app/work-hive-banner.png',
+          url: 'https://workshive.vercel.app/workshive-banner.png',
           width: 800,
           height: 600,
           alt: job.data.title,
@@ -41,7 +41,7 @@ export async function generateMetadata({
       card: 'summary_large_image',
       title: `${job.data.title} - ${job.data.company}`,
       description: job.data.description?.slice(0, 150) + '...',
-      images: 'https://workshive.vercel.app/work-hive-banner.png',
+      images: 'https://workshive.vercel.app/workshive-banner.png',
     },
   };
 }

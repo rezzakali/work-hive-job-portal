@@ -20,7 +20,6 @@ export function Job({
   location,
   salary,
   skills,
-  status,
   title,
 }: JobInterface) {
   return (
